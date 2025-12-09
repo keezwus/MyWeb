@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>游戏分享 - 我的个人网站</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            /* 添加背景图片 */
+            background-image: url('../image/background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+
+        header {
+            background-color: #343a40;
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            color: #fff;
+        }
+
+        .logo h1 a {
+            color: white;
+            text-decoration: none;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ffc107;
+        }
+
+        .game-section {
+            padding: 4rem 0;
+        }
+
+        .game-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 12px;
+        }
+
+        .game-header h2 {
+            font-size: 2.2rem;
+            color: #343a40;
+            margin-bottom: 1rem;
+        }
+
+        .game-header p {
+            font-size: 1.1rem;
+            color: #6c757d;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .game-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .game-card {
+            width: calc(50% - 2.5rem);
+            max-width: 500px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .game-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .game-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, #007bff, #6610f2);
+        }
+
+        .game-poster {
+            width: 100%;
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 宽高比 */
+            height: 0;
+            overflow: hidden;
+            background-color: #f8f9fa;
+        }
+
+        .game-poster img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .game-card:hover .game-poster img {
+            transform: scale(1.05);
+        }
+
+        .game-content {
+            padding: 1.5rem;
+        }
+
+        .game-content h3 {
+            font-size: 1.4rem;
+            color: #007bff;
+            margin-bottom: 0.8rem;
+        }
+
+        .game-content .game-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .game-content p {
+            color: #495057;
+            margin-bottom: 1.2rem;
+            line-height: 1.7;
+        }
+
+
+
+        .favorites-section {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        .favorites-section h3 {
+            font-size: 1.8rem;
+            color: #007bff;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .favorites-section h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, #007bff, #6610f2);
+            border-radius: 2px;
+        }
+
+        .favorites-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .favorite-item {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            width: 200px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .favorite-item:hover {
+            border-color: #007bff;
+            transform: translateY(-5px);
+        }
+
+        .favorite-item h4 {
+            color: #343a40;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .tips-section {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        .tips-section h3 {
+            font-size: 1.8rem;
+            color: #007bff;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .tips-section h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, #007bff, #6610f2);
+            border-radius: 2px;
+        }
+
+        .tips-list {
+            list-style: none;
+        }
+
+        .tips-list li {
+            margin-bottom: 20px;
+            padding-left: 30px;
+            position: relative;
+            line-height: 1.8;
+            color: #495057;
+        }
+
+        .tips-list li::before {
+            content: '🎮';
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .content-wrapper {
+            flex: 1;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin: 0;
+            width: 100%;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .game-card {
+                width: 100%;
+                max-width: 500px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+            }
+
+            nav ul li {
+                margin: 0 1rem;
+            }
+
+            .container {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <h1><a href="../index.html">我的个人主页</a></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="about.html">关于我</a></li>
+
+                    <li><a href="photo.html">我的相册</a></li>
+                    <li><a href="anime.html">漫影共赏</a></li>
+                    <li><a href="game.html" style="color: #ffc107;">游戏分享</a></li>
+                    <li><a href="contact.html">联系方式</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="content-wrapper">
+        <section class="game-section">
+            <div class="container">
+                <div class="game-header">
+                    <h2>游戏分享</h2>
+                    <p>探索游戏世界的魅力，分享我的游戏心得与推荐</p>
+                </div>
+
+                <div class="game-grid">
+                    <div class="game-card">
+                        <div class="game-poster">
+                            <img src="../image/game/game1.jpg" alt="我的世界">
+                        </div>
+                        <div class="game-content">
+                            <h3><a href="https://www.mcmod.cn/modpack/367.html" style="color: inherit; text-decoration: none;">我的世界</a></h3>
+                            <div class="game-info">
+                                <span>沙盒 / 开放世界</span>
+                                <span>2009</span>
+                            </div>
+                            <p>mc, 轻而易举啊!</p>
+                        </div>
+                    </div>
+                    <div class="game-card">
+                        <div class="game-poster">
+                            <img src="../image/game/game2.jpg" alt="星际拓荒">
+                        </div>
+                        <div class="game-content">
+                            <h3><a href="https://www.brace.dev/travelers/" style="color: inherit; text-decoration: none;">星际拓荒</a></h3>
+                            <div class="game-info">
+                                <span>探险 / 解谜 / 时间循环</span>
+                                <span>2019</span>
+                            </div>
+                            <p>音乐很好听的烤棉花糖模拟器</p>
+    
+                        </div>
+                    </div>
+                    <div class="game-card">
+                        <div class="game-poster">
+                            <img src="../image/game/game3.jpg" alt="图灵完备">
+                        </div>
+                        <div class="game-content">
+                            <h3><a href="https://turingcomplete.game/" style="color: inherit; text-decoration: none;">图灵完备</a></h3>
+                            <div class="game-info">
+                                <span>解谜 / 模拟 / 电路构建</span>
+                                <span>2021</span>
+                            </div>
+                            <p>用与非门构建出图灵完备的计算机</p>
+    
+                        </div>
+                    </div>
+                    <div class="game-card">
+                        <div class="game-poster">
+                            <img src="../image/game/game4.jpg" alt="Counter-Strike 2">
+                        </div>
+                        <div class="game-content">
+                            <h3><a href="https://www.counter-strike.net/" style="color: inherit; text-decoration: none;">Counter-Strike 2</a></h3>
+                            <div class="game-info">
+                                <span>FPS / 战术 / 竞技</span>
+                                <span>2023</span>
+                            </div>
+                            <p>好枪，兄弟</p>
+    
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 我的个人主页</p>
+        </div>
+    </footer>
+</body>
+</html>

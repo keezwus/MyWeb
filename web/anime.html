@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>漫影共赏 - 我的个人主页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            /* 添加背景图片 */
+            background-image: url('../image/background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+        
+        header {
+            background-color: #343a40;
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            color: #fff;
+        }
+        
+        .logo h1 a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #ffc107;
+        }
+        
+        .anime-section {
+            padding: 4rem 0;
+        }
+        
+        .anime-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 12px;
+        }
+        
+        .anime-header h2 {
+            font-size: 2.2rem;
+            color: #343a40;
+            margin-bottom: 1rem;
+        }
+        
+        .anime-header p {
+            font-size: 1.1rem;
+            color: #6c757d;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .anime-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+        
+        .anime-item {
+            display: flex;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            align-items: center;
+        }
+        
+        .anime-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* 移除左侧彩色条带
+        .anime-item::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #ff6b6b, #ffa502);
+        }*/
+        
+        .anime-poster {
+            overflow: hidden;
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        /* 9:16 竖屏比例 - 相对卡片高度自适应 */
+        .anime-poster.portrait {
+            width: 35%;
+            max-width: 180px;
+            height: auto;
+            aspect-ratio: 9/16;
+        }
+        
+        /* 16:9 横屏比例 - 相对卡片宽度自适应 */
+        .anime-poster.landscape {
+            width: 40%;
+            max-width: 220px;
+            height: auto;
+            aspect-ratio: 16/9;
+        }
+        
+        .anime-poster img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .anime-item:hover .anime-poster img {
+            transform: scale(1.05);
+        }
+        
+        .anime-content {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .anime-content h3 {
+            font-size: 1.4rem;
+            color: #ff6b6b;
+            margin-bottom: 0.5rem;
+        }
+        
+        .anime-content .anime-info {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        
+        .anime-content p {
+            color: #495057;
+            line-height: 1.7;
+        }
+        
+
+        
+        .favorites-section {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+        }
+        
+        .favorites-section h3 {
+            font-size: 1.8rem;
+            color: #667eea;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        .favorites-section h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+        
+        .favorites-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+        
+        .favorite-item {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            width: 200px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .favorite-item:hover {
+            border-color: #667eea;
+            transform: translateY(-5px);
+        }
+        
+        .favorite-item h4 {
+            color: #343a40;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        html {
+            height: 100%;
+        }
+        
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+        }
+        
+        .content-wrapper {
+            flex: 1;
+        }
+        
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin: 0;
+            width: 100%;
+        }
+        
+        @media (max-width: 768px) {
+            .anime-item {
+                flex-direction: column;
+            }
+            
+            .anime-poster.portrait,
+            .anime-poster.landscape {
+                width: 100%;
+                max-width: 100%;
+                height: 200px;
+                aspect-ratio: auto;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+            }
+            
+            nav ul li {
+                margin: 0 1rem;
+            }
+            
+            .container {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <h1><a href="../index.html">我的个人主页</a></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="about.html">关于我</a></li>
+
+                    <li><a href="photo.html">我的相册</a></li>
+                    <li><a href="anime.html" style="color: #ffc107;">漫影共赏</a></li>
+                    <li><a href="game.html">游戏分享</a></li>
+                    <li><a href="contact.html">联系方式</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="content-wrapper">
+    
+    <section class="anime-section">
+        <div class="container">
+            <div class="anime-header">
+                <h2>漫影共赏</h2>
+                <p>这里是我喜欢的动漫和漫画推荐，希望能与你分享这些精彩的作品！</p>
+            </div>
+            
+            <div class="anime-list">
+                <div class="anime-item">
+                    <div class="anime-poster portrait">
+                        <img src="../image/anime/anime1.jpg" alt="蘑菇的拟态日常">
+                    </div>
+                    <div class="anime-content">
+                        <h3><a href="https://holedigging.club/cool/" style="color: inherit; text-decoration: none;">蘑菇的拟态日常</a></h3>
+                        <div class="anime-info">
+                            <span>Tsukumizu</span>
+                        </div>
+                        <p>——踏出一步后，在你面前的是更加辽阔的世界。</p>
+                        <p>充满诗意的超现实主义日常漫画</p>
+                        <p>(还有很多秋刀鱼</p>
+                    </div>
+                </div>
+                
+                <div class="anime-item">
+                    <div class="anime-poster portrait">
+                        <img src="../image/anime/anime2.jpg" alt="日常">
+                    </div>
+                    <div class="anime-content">
+                        <h3><a href="https://mzh.moegirl.org.cn/%E6%97%A5%E5%B8%B8(%E6%BC%AB%E7%94%BB)#" style="color: inherit; text-decoration: none;">日常</a></h3>
+                        <div class="anime-info">
+                            <span>新井圭一</span>
+                        </div>
+                        <p>我们所经历的每个平凡的日常，也许就是连续发生的奇迹。</p>
+                    </div>
+                </div>
+                
+                <div class="anime-item">
+                    <div class="anime-poster landscape">
+                        <img src="../image/anime/anime3.jpg" alt="少女终末旅行">
+                    </div>
+                    <div class="anime-content">
+                        <h3><a href="https://holedigging.club/cool/" style="color: inherit; text-decoration: none;">少女终末旅行</a></h3>
+                        <div class="anime-info">
+                            <span>Tsukumizu</span>
+                        </div>
+                        <p>生存不止终点。</p>
+                        <p>以一切都迎来结束的世界为舞台，</p>
+                        <p>两位少女展开旅行的末日幻想剧，就此开幕。</p>
+                    </div>
+                </div>
+                
+                <div class="anime-item">
+                    <div class="anime-poster landscape">
+                        <img src="../image/anime/anime4.jpg" alt="轻音少女">
+                    </div>
+                    <div class="anime-content">
+                        <h3><a href="https://mzh.moegirl.org.cn/%E8%BD%BB%E9%9F%B3%E5%B0%91%E5%A5%B3" style="color: inherit; text-decoration: none;">轻音少女</a></h3>
+                        <div class="anime-info">
+                            <span>Kakifly</span>
+                        </div>
+                        <p>K-ON!</p>
+                    </div>
+                </div>
+            </div>
+            
+
+        </div>
+    </section>
+    
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 我的个人主页</p>
+        </div>
+    </footer>
+</body>
+</html>

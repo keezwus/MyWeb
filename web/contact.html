@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>联系方式 - 我的个人主页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            /* 添加背景图片 */
+            background-image: url('../image/background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+        
+        header {
+            background-color: #343a40;
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            color: #fff;
+        }
+        
+        .logo h1 a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #ffc107;
+        }
+        
+        .contact-section {
+            padding: 4rem 0;
+        }
+        
+        .contact-section h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #343a40;
+            font-size: 2rem;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 1.5rem;
+            border-radius: 8px;
+            display: inline-block;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .contact-content {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .contact-info {
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        .contact-info {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-info h3 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+        
+        .info-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .info-icon {
+            min-width: 40px;
+            height: 40px;
+            background-color: #667eea;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .info-text h4 {
+            margin-bottom: 0.3rem;
+            color: #343a40;
+        }
+        
+        .info-text p {
+            margin: 0;
+            color: #6c757d;
+        }
+        
+        .info-text a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .info-text a:hover {
+            text-decoration: underline;
+        }
+        
+        .contact-message {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-message h3 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .message-form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #343a40;
+            font-weight: bold;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+        
+        .submit-btn {
+            background-color: #667eea;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #5a6fd8;
+        }
+        
+        .social-links {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #667eea;
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .social-link:hover {
+            background-color: #5a6fd8;
+        }
+        
+        html {
+            height: 100%;
+        }
+        
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+        }
+        
+        .content-wrapper {
+            flex: 1;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .info-item {
+            background-color: #f8f9fa;
+            border-radius: 12px;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .info-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+        
+        .info-icon {
+            font-size: 36px;
+            margin-right: 20px;
+            color: #007bff;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #e3f2fd;
+            border-radius: 50%;
+        }
+        
+        .info-text h4 {
+            margin: 0 0 10px 0;
+            color: #333;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        .info-text p {
+            margin: 0;
+            color: #555;
+            font-size: 18px;
+        }
+        
+        .info-text a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        
+        .info-text a:hover {
+            text-decoration: underline;
+        }
+        
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin: 0;
+            width: 100%;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+            }
+            
+            nav ul li {
+                margin: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <h1><a href="../index.html">我的个人主页</a></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="about.html">关于我</a></li>
+
+                    <li><a href="photo.html">我的相册</a></li>
+                    <li><a href="anime.html">漫影共赏</a></li>
+                    <li><a href="game.html">游戏分享</a></li>
+                    <li><a href="contact.html" style="color: #ffc107;">联系方式</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="content-wrapper">
+    
+    <section class="contact-section">
+        <div class="container">
+            <h2>联系我</h2>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>联系方式</h3>
+                    
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-icon">📧</div>
+                            <div class="info-text">
+                                <h4>电子邮箱</h4>
+                                <p><a href="mailto:example@mail.com">example@mail.com</a></p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">💬</div>
+                            <div class="info-text">
+                                <h4>QQ号</h4>
+                                <p>1234567890</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">🔗</div>
+                            <div class="info-text">
+                                <h4>GitHub主页</h4>
+                                <p><a href="https://github.com/" target="_blank">GitHub个人主页</a></p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">🏫</div>
+                            <div class="info-text">
+                                <h4>学校</h4>
+                                <p>华中科技大学</p>
+                            </div>
+                        </div>
+                        
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 我的个人主页</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于我 - 我的个人主页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            /* 添加背景图片 */
+            background-image: url('../image/background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+        
+        header {
+            background-color: #343a40;
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            color: #fff;
+        }
+        
+        .logo h1 a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #ffc107;
+        }
+        
+        .about-section {
+            padding: 4rem 0;
+        }
+        
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 3px solid #667eea;
+        }
+        
+        .about-text {
+            text-align: center;
+            max-width: 800px;
+        }
+        
+        .about-text h2 {
+            margin-bottom: 1.5rem;
+            color: #343a40;
+        }
+        
+        .about-text p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .personal-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+            width: 100%;
+        }
+        
+        .info-item {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: left;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .info-item h3 {
+            margin-bottom: 1rem;
+            color: #667eea;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+        
+        .info-item ul {
+            list-style: none;
+        }
+        
+        .info-item li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .info-item li strong {
+            min-width: 80px;
+            display: inline-block;
+        }
+        
+        html {
+            height: 100%;
+        }
+        
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+        }
+        
+        .content-wrapper {
+            flex: 1;
+        }
+        
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin: 0;
+            width: 100%;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+            }
+            
+            nav ul li {
+                margin: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <h1><a href="../index.html">我的个人主页</a></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="about.html" style="color: #ffc107;">关于我</a></li>
+
+                    <li><a href="photo.html">我的相册</a></li>
+                    <li><a href="anime.html">漫影共赏</a></li>
+                    <li><a href="game.html">游戏分享</a></li>
+                    <li><a href="contact.html">联系方式</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="content-wrapper">
+    
+    <section class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <div class="profile-image">
+                    <img src="../image/avatar.png" alt="个人头像">
+                </div>
+                <div class="about-text">
+                    <h2>关于我</h2>
+                    <p>你好！欢迎来到我的个人空间</p>
+                    <p>我相信每个人都有自己独特的故事，而这个网站就是我分享自己故事的地方。</p>
+                    <p>我希望通过这个网站，能够与更多志同道合的朋友交流，也希望能够给访问者带来一些启发和帮助。如果你有任何想法或建议，欢迎随时联系我！</p>
+                </div>
+                
+                <div class="personal-info">
+                    <div class="info-item">
+                        <h3>基本信息</h3>
+                        <ul>
+                            <li><strong>姓名：</strong>陈效源</li>
+                            <li><strong>专业：</strong>计算机类</li>
+                            <li><strong>学校：</strong>华中科技大学</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-item">
+                        <h3>教育背景</h3>
+                        <ul>
+                            <li><strong>本科：</strong>华中科技大学</li>
+                            <li><strong>入学时间：</strong>2025年</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-item">
+                        <h3>特点</h3>
+                        <ul>
+                            <li><strong>爱好：</strong>阅读、编程、ACG</li>
+                            <li><strong>目标：</strong>努力学习,充实自己</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 我的个人主页</p>
+        </div>
+    </footer>
+</body>
+</html>
